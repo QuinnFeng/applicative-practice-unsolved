@@ -5,7 +5,9 @@ import { data } from "../data/data";
 // Return example: 42
 
 export function allPlanetsMoonsCount(data) {
-  // Your code goes here...
+    return data.planets.reduce(
+        (sum,p)=>sum+=p.hasOwnProperty('moons')?p.moons.length:0
+    ,0);
 }
 
 
