@@ -8,35 +8,24 @@ import { maxBy} from "../exercises/e17";
 export function getGreatestDiscoveryYear(data) {
     /* Alternative way,using Map:
     */
-
-    // const discoveriesByYear = new Map();
-    // let count=1;
-    // let greatestDiscoveryYear=data.asteroids[0];
+   
+    // const discoveryCounts = new Map();
+    // let count=0;
+    // let greatestDiscoveryYear;
     // for(const a of data.asteroids){
     //     const dY= a.discoveryYear;
-    //     if(discoveriesByYear.has(dY)){
-    //         let frequency=discoveriesByYear.get(dY)+1;
-    //         discoveriesByYear.set(dY,frequency);
-    //         if(frequency>count){
-    //             count=frequency;
-    //             greatestDiscoveryYear=dY;
-    //         }
-    //     }
-    //     else{
-    //         discoveriesByYear.set(dY,1);
+    //     let frequency= (discoveryCounts.get(dY)||0)+1;
+    //     discoveryCounts.set(dY, frequency);
+    //     if(frequency>count){
+    //         count=frequency;
+    //         greatestDiscoveryYear=dY;
     //     }
     // }
     // return greatestDiscoveryYear;
     
-
     //using Set and maxBy from previous exercise
-    const years= new Set();
-    data.asteroids.forEach(element => {
-        years.add(element.discoveryYear);
-    });
-    years.forEach(y=>console.log(y));
     const count = (year) => data.asteroids.filter((a) => a.discoveryYear == year).length;
-    return maxBy(Array.from(years),count);
+    return maxBy(Array.from(new Set(data.asteroids.map((a) => a.discoveryYear))),count);
 }
 
 // === TEST YOURSELF ===
